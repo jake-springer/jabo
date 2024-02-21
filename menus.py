@@ -18,13 +18,17 @@ settings_menu = {
     }
 apps_menu = {
     "name":"Apps",
-    "options":[]
+    "options":[
+        "Calculator",
+        "Contacts",
+        "Buzzer"
+        ]
     }
 
 all_menus = [main_menu, settings_menu, apps_menu]
 
-# Add "Go back" to each options list
-for m in all_menus:
+# Add "Go back" to each options list, except Main
+for m in all_menus[1:]:
     m["options"].append("Go back")
 
 class MenuMap:
@@ -42,6 +46,15 @@ class MenuMap:
                 break
         self.menu_name = self.current_menu['name']
         self.options = self.current_menu['options']
+        
+    def go_back(self):
+        try:
+            if self.trail[-1] == 'Go back':
+                return self.go() # Prevents getting stuck because last in trail is "go back"
+            self.current_menu = self.trail[-1]
+            return self.go(self.current_menu)
+        except IndexError:
+            return self.go() # Reset to main menu
     
     def go(self, menu_name="Main"):
         # Go to a given menu, will return to main by default 

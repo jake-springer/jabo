@@ -113,25 +113,16 @@ class TextBox:
 
 
 class MenuWalker:
-    def __init__(self, directory):
+    def __init__(self):
         self.run_flag = True
-        self.directory = directory  # Nested dictionary of menu options
-        self.menu_name = 'top'
-        self.options = self.directory[self.menu_name]
-        self.active_item = self.options[0]  # Option currently selected by the cursor
-        self.active_item_index = 0
-        self.shown_items = []    # Options currently on screen 
-        self.picked = None
+            
         self.cursor = '<-'
         self.cursor_pos = 'end' # can be before or after the string (start/end)
-
-
-    def navigate_directory(self, option):
-        # Unwrap self.directory and show options based on where the user is
-        print("> Current menu: " + self.menu_name)
-        print("> User choices: " + str(self.options))
-        
-
+    
+        self.menmap = MenuMap()
+        self.options = self.menmap.options
+        self.active_item = self.options[0]  # Option currently selected by the cursor
+        self.active_item_index = 0
 
     def nav_up(self):
         # Move up (backwards) in the list
@@ -150,13 +141,24 @@ class MenuWalker:
         self.active_item = self.options[self.active_item_index]
         self.show_options()
     
+    def _switch_menu(self):
+        self.active_item_index = 0
+        if self.active_item == 'Go back':
+            print("[UI] Selected 'Go back'")
+            self.options = self.menmap.go_back()
+        else:
+            self.options = self.menmap.go(self.active_item)
+            print(f"[UI] Selected '{self.active_item}'")
+        self.active_item = self.options[self.active_item_index]
+        self.show_options()
+        
     def await_input(self):
         if up.is_pressed():
             self.nav_up()
         elif down.is_pressed():
             self.nav_down()
         elif a.is_pressed():
-            pass
+            self._switch_menu()
         elif b.is_pressed():
             pass
         else:
@@ -167,6 +169,9 @@ class MenuWalker:
     def show_options(self):
         display.clear()
         l = 1  # Line on screen
+        print(self.options)
+        print(self.active_item)
+        #input()
         for o in self.options[self.options.index(self.active_item):]:
             if o == self.active_item:
                 # Modify the line to include the cursor
