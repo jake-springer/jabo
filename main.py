@@ -1,4 +1,7 @@
-# 0.0.1
+# 2/19/24
+
+import sys 
+sys.path.append('./apps')
 
 from machine import I2C, Pin
 from utime import sleep
@@ -6,6 +9,7 @@ from ssd1306 import SSD1306_I2C
 from time import sleep
 from display import Display
 from button import Button
+from ui import MenuWalker, splash_screen
 
 # ------------------------------------------------------
 
@@ -14,19 +18,15 @@ from button import Button
 #     led.toggle()
 #     sleep(1)
 
-display = Display()
-
 a = Button('a')
 b = Button('b')
 down = Button('down')
 up = Button('up')
 
-buttons = [a, b, down, up]
+splash_screen()
 
-while True:
-    for b in buttons:
-        if b.is_pressed():
-            display.simple_text(f"{b.alias} was pressed!")
-            sleep(0.5)
+
+m = MenuWalker(menus)
+m.navigate_directory()
 
 #--------------------------------------------------------

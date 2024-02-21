@@ -26,7 +26,8 @@ class Display(SSD1306_I2C):
         #self.clear()
 
     def line(self, line_no):
-        if line_no == 'center':
+        # Get the pixel position of a line of text with a number 1-5
+        if line_no == 'center':    #  Lil alias for ease of use
             return 1 * self.line_height
         # subtract 1 to make up for 0 index & i'm stupid
         return (line_no - 1) * self.line_height
@@ -35,50 +36,17 @@ class Display(SSD1306_I2C):
         self.fill(0)
         self.show()
 
-    def blink(self, seconds):
+
+    def blink(self, x):
         self.clear()
         count = 0
-        while count < seconds:
+        while count < x:
             self.fill(1)
             self.show()
-            sleep(0.5)
+            sleep(0.1)
             self.clear()
-            sleep(0.5)
+            sleep(0.1)
             count += 1
-        
-    def line_break(self, text):
-        lines = []
-        current_line = ""
-        words = text.split(" ")
-        for w in words:
-            too_long = len(current_line) + len(w) >= self.max_chars
-            if too_long:
-                lines.append(current_line)
-                current_line = w
-            else:
-                current_line = current_line + ' ' + w
-        lines.append(current_line) # Append whatever is left over
-        return lines
-    
-    
-    def show_text(self, given_text):
-        self.clear()
-        lines = self.line_break(given_text)
-        current_line = 0
-        for l in lines:
-            self.text(l, 0, self.line(current_line))
-            current_line += 1
-        self.show()
-        
-
-    def simple_text(self, given_text):
-        self.clear()
-        self.text(given_text, 0, 0)
-        self.show()
-        
-            
-            
-
     
 
         
