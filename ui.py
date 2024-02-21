@@ -12,7 +12,6 @@ up = Button('up')
 down = Button('down')
 
 display = Display()
-
 splash_delay = 1
 
 
@@ -22,6 +21,7 @@ def splash_screen():
     display.text(centered_text(app.version), 0 , display.line(3))
     display.show()
     sleep(splash_delay)
+
 
 def centered_text(text):
     total_pad = display.max_chars - len(text)
