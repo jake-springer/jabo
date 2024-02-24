@@ -18,10 +18,12 @@ main_menu = { # Basically the home screen
     "name":"Main",
     "options":["Apps", "Games", "Settings"]
     }
+
 settings_menu = {
     "name":"Settings",
     "options":[]
     }
+
 apps_menu = {
     "name":"Apps",
     "options":[
