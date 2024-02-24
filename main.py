@@ -4,7 +4,7 @@ from random import randint
 
 dim = [127, 63]
 speed = [3, -3]
-size = 3
+size = 10
 position = [0, 0]
 display = Display()
 #x, y, color
@@ -33,9 +33,9 @@ while (True):
         position[1] = size
         speed[1] = -randint(speed[1]-1, speed[1]+1)
 
-    display.rect(position[0], position[1], size, size, 1)
+    display.rect(position[0], position[1], size, size, 1, True)
     display.show()
-    display.rect(position[0], position[1], size, size, 1)
+    display.rect(position[0], position[1], size, size, 0, True)
     print(position)
     
 
