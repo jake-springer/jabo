@@ -26,7 +26,7 @@ up = Button('up')
 splash_screen()
 
 
-m = MenuWalker(menus)
-m.navigate_directory()
+m = MenuWalker()
+m.run()
 
 #--------------------------------------------------------
