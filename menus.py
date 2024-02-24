@@ -6,13 +6,18 @@
 #		- The list of options given to the user when that menu is
 #	      considered "active"
 
-menus = {
+class Menu:
 
-    {"Name": ["Apps", "Games", "Settings"]},
-    {"Settings": ["Brightness", "Refresh Rate", "Contrast"]},
-    {"Apps": ["Calculator", "Contacts", "Buzzer"]}
+    # Name: name of the menu
+    # Parent menu: Menu object of the parent in the menu hierarchy
+    # Options: Menu options (Array of menus)
+    # isNav: Is its purpose to open another menu or is it to open an application
+    def __init__(self, name: str, parent_menu, options, isNav: bool):
+        self.name = name
+        self.parent_menu = parent_menu
+        self.options = options
+        self.isNav = bool
 
-}
 
 main_menu = { # Basically the home screen
     "name":"Main",
