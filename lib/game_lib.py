@@ -1,5 +1,5 @@
-from utils import math
-from math import Vector2D
+import _math
+from _math import Vector2D
 
 
 class GameObject():

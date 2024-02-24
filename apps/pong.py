@@ -1,8 +1,10 @@
 # import sys
 # sys.path.append("../utils")
-from .._math import Vector2D
-from display import Display
-from game_lib import GameObject
+from ..lib._math import Vector2D
+from ..sys.display import Display
+from ..lib.game_lib import GameObject
+
+dimension = Vector2D(128, 64)
 
 player1 = GameObject(Vector2D(0, 0), Vector2D(30, 5))
 player2 = GameObject(Vector2D(123, 0), Vector2D(30, 5))

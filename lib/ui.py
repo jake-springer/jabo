@@ -1,9 +1,9 @@
 # The "operating system" of jabo
 
 from time import sleep
-from display import Display
-from button import Button
-import app
+from ..sys.display import Display
+from ..sys.button import Button
+from ..etc import app
 from menus import MenuMap
 
 a = Button('a')
