@@ -1,10 +1,10 @@
 # The "operating system" of jabo
 
 from time import sleep
-from display import Display
-from button import Button
-import app
-from menus import MenuMap
+from system.display import Display
+from system.button import Button
+import etc.app
+from lib.menus import MenuMap
 
 a = Button('a')
 b = Button('b')
@@ -19,7 +19,7 @@ splash_delay = 1
 def splash_screen():
     display.clear()
     display.text(centered_text('jabo'), 0, display.line(2))
-    display.text(centered_text(app.version), 0 , display.line(3))
+    display.text(centered_text(etc.app.version), 0 , display.line(3))
     display.show()
     sleep(splash_delay)
 
