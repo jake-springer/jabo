@@ -1,13 +1,25 @@
 from display import Display
+from random import randint
 
 dim = (128, 64)
-
+speed = (3, -3)
+position = (0, 0)
 display = Display()
 #x, y, color
-for i in range(dim[0]):
-    for j in range(dim[1]):
-        display.pixel(i, j, 1)
-        display.show()
-        display.pixel(i, j, 0)
 
-display.show()
+while (True):
+    position[0] += speed[0]
+    position[1] += speed[1]
+
+    if(position[0] > 128):
+        position[0] = 128
+        speed[0] = -randint(speed[0]-1, speed[0]+1)
+        
+    if(position[1] > 128):
+        position[1] = 128
+        speed[1] = -randint(speed[1]-1, speed[1]+1)
+
+    display.pixel(position[0], position[1], 1)
+    display.show()
+    display.pixel(position[0], position[1], 0)
+
