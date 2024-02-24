@@ -1,4 +1,6 @@
-from math import Vector2D
+# import sys
+# sys.path.append("../utils")
+from .._math import Vector2D
 from display import Display
 from game_lib import GameObject
 

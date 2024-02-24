@@ -1,6 +1,7 @@
 from utils import math
 from math import Vector2D
 
+
 class GameObject():
         position: Vector2D
         size: Vector2D
