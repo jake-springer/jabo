@@ -6,7 +6,13 @@
 #		- The list of options given to the user when that menu is
 #	      considered "active"
 
+menus = {
 
+    {"Name": ["Apps", "Games", "Settings"]},
+    {"Settings": ["Brightness", "Refresh Rate", "Contrast"]},
+    {"Apps": ["Calculator", "Contacts", "Buzzer"]}
+
+}
 
 main_menu = { # Basically the home screen
     "name":"Main",
