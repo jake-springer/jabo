@@ -1,3 +1,32 @@
-import pong
+# 2/19/24
 
-pong.start_game()
+import sys 
+sys.path.append('./apps')
+
+from machine import I2C, Pin
+from utime import sleep
+from ssd1306 import SSD1306_I2C
+from time import sleep
+from display import Display
+from button import Button
+from ui import MenuWalker, splash_screen
+
+# ------------------------------------------------------
+
+led = Pin("LED", Pin.OUT)
+power_led = Pin(15, Pin.OUT)
+led.on()
+power_led.on()
+
+a = Button('a')
+b= Button('b')
+down = Button('down')
+up = Button('up')
+#
+splash_screen()
+
+
+m = MenuWalker()
+m.run()
+
+#--------------------------------------------------------
