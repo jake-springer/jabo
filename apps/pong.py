@@ -18,10 +18,16 @@ def start_game(_input: input_handler):
     input = _input
     display = Display()
     while game_running:
-        input.tick()
-        player1.display(display)
-        player2.display(display)
-        
+        tick()
+ 
+
+# Coded this fucken function on my phone
+def tick():
+    input.tick()
+    player1.display(display)
+    player2.display(display)
+    
+       
         
 #Important to note increasing Y value is down    
 def move():
