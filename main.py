@@ -5,8 +5,8 @@ from utime import sleep
 from time import sleep
 from system.display import Display
 from system.button import Button
-from lib.ui import splash_screen
-from lib.ui import MenuWalker
+from system.jabos import splash_screen
+from system.jabrowser import browser
 
 # ------------------------------------------------------
 
@@ -19,11 +19,10 @@ a = Button('a')
 b= Button('b')
 down = Button('down')
 up = Button('up')
-#
+
 splash_screen()
 
+browser.run()
 
-m = MenuWalker()
-m.run()
 
 #--------------------------------------------------------
