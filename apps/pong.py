@@ -13,6 +13,7 @@ player2 = GameObject(Vector2D(123, 0), Vector2D(30, 5))
 
 game_running = True
 input: input_handler
+display: Display
 
 def start_game(_input: input_handler):
     input = _input
