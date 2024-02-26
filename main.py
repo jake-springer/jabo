@@ -5,7 +5,8 @@ from utime import sleep
 from time import sleep
 from system.display import Display
 from system.button import Button
-from lib.ui import MenuWalker, splash_screen
+from lib.ui import splash_screen
+from lib.ui import MenuWalker
 
 # ------------------------------------------------------
 
