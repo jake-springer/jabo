@@ -4,7 +4,6 @@ from time import sleep
 from system.display import Display
 from system.button import Button
 import etc.app
-from lib.menus import MenMap
 
 a = Button('a')
 b = Button('b')
@@ -115,9 +114,9 @@ class NavItem:
         self.name = name
         self.options = options # List of other nav items 
         self.parent = parent # NavItem of "Go back"
-        if self.parent:
-            self.options.append("Go back")
-
+        # if self.parent:
+            # self.options.append("Go back")
+            
 
 main = NavItem('Main', None, None)
 apps = NavItem('Apps', [], main)
@@ -131,16 +130,21 @@ class MenMap:
     # my dad will handle it
     def __init__(self):
         self.active = main  # ItemNav object
-        self.options = self._load_options() 
+        self.options = self._load_options()
+        self.sub_menus = self.active.options
 
     def _load_options(self):
         # Create a list of strings of the option names to
         # display to the user 
-        return [x.name for x in self.active.options]
+        menu_options = [x.name for x in self.active.options]
+        if self.active.name != 'Main':
+            menu_options.append('Go back')
+        return menu_options
         
     def _load_menu_object(self, navitem):
         # Set attributes based on the new active item
         self.active = navitem 
+        self.sub_menus = self.active.options
         self.options = self._load_options()
         return self.options 
 
@@ -148,7 +152,7 @@ class MenMap:
         if nav_name == 'Go back':
             self._load_menu_object(self.active.parent)
         else:
-            for menu in self.options:
+            for menu in self.sub_menus: 
                 # Find the navitem object from the given name
                 if menu.name == nav_name:
                     self._load_menu_object(menu)
@@ -189,12 +193,8 @@ class MenuWalker:
     
     def _switch_menu(self):
         self.active_item_index = 0
-        if self.active_item == 'Go back':
-            print("[UI] Selected 'Go back'")
-            self.options = self.menmap.go_back()
-        else:
-            self.options = self.menmap.go(self.active_item)
-            print(f"[UI] Selected '{self.active_item}'")
+        self.options = self.menmap.go(self.active_item)
+        print(f"[UI] Selected '{self.active_item}'")
         self.active_item = self.options[self.active_item_index]
         self.show_options()
         
@@ -215,9 +215,6 @@ class MenuWalker:
     def show_options(self):
         display.clear()
         l = 1  # Line on screen
-        print(self.options)
-        print(self.active_item)
-        #input()
         for o in self.options[self.options.index(self.active_item):]:
             if o == self.active_item:
                 # Modify the line to include the cursor
