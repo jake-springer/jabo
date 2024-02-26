@@ -10,6 +10,8 @@ from time import sleep
 from display import Display
 from button import Button
 from ui import MenuWalker, splash_screen
+# from apps import pong
+# from lib import input_handler
 
 # ------------------------------------------------------
 
@@ -28,5 +30,8 @@ splash_screen()
 
 m = MenuWalker()
 m.run()
+
+# input = input_handler.input_handler(a, b, down, up)
+# pong.start_game(input)
 
 #--------------------------------------------------------
