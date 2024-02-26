@@ -1,10 +1,10 @@
 # The "operating system" of jabo
 
 from time import sleep
-from ..sys.display import Display
-from ..sys.button import Button
-from ..etc import app
-from menus import MenuMap
+from system.display import Display
+from system.button import Button
+import etc.app
+from lib.menus import MenMap
 
 a = Button('a')
 b = Button('b')
@@ -19,7 +19,7 @@ splash_delay = 1
 def splash_screen():
     display.clear()
     display.text(centered_text('jabo'), 0, display.line(2))
-    display.text(centered_text(app.version), 0 , display.line(3))
+    display.text(centered_text(etc.app.version), 0 , display.line(3))
     display.show()
     sleep(splash_delay)
 
@@ -107,19 +107,65 @@ class TextBox:
         while self.run_flag:
             self.await_nav()
 
-
-
 #--------------------------------------------------------------------------------
 
 
+class NavItem:
+    def __init__(self, name, options, parent):
+        self.name = name
+        self.options = options # List of other nav items 
+        self.parent = parent # NavItem of "Go back"
+        if self.parent:
+            self.options.append("Go back")
+
+
+main = NavItem('Main', None, None)
+apps = NavItem('Apps', [], main)
+games = NavItem('Games', [], main)
+settings = NavItem('Settings', [], main)
+
+main.options = [apps, games, settings]
+
+class MenMap:
+    # Please don't add any cringe ":" or "->" to me please, 
+    # my dad will handle it
+    def __init__(self):
+        self.active = main  # ItemNav object
+        self.options = self._load_options() 
+
+    def _load_options(self):
+        # Create a list of strings of the option names to
+        # display to the user 
+        return [x.name for x in self.active.options]
+        
+    def _load_menu_object(self, navitem):
+        # Set attributes based on the new active item
+        self.active = navitem 
+        self.options = self._load_options()
+        return self.options 
+
+    def go(self, nav_name):
+        if nav_name == 'Go back':
+            self._load_menu_object(self.active.parent)
+        else:
+            for menu in self.options:
+                # Find the navitem object from the given name
+                if menu.name == nav_name:
+                    self._load_menu_object(menu)
+                    break
+        return self.options
+        
+
 class MenuWalker:
+    # Scroll through a list of options, user selects one,
+    # and is navigated accordingly. 
     def __init__(self):
         self.run_flag = True
             
         self.cursor = '<-'
         self.cursor_pos = 'end' # can be before or after the string (start/end)
     
-        self.menmap = MenuMap()
+        self.menmap = MenMap()
         self.options = self.menmap.options
         self.active_item = self.options[0]  # Option currently selected by the cursor
         self.active_item_index = 0
