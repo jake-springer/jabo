@@ -8,9 +8,6 @@ class Vector2D():
         self.x = x
         self.y = y
         
-    def __str__(self):
-        return f"({self.x}, {self.y})"
-        
     def __add__(self, vec):
         return Vector2D(self.x + vec.x, self.y + vec.y)
     
