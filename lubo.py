@@ -38,17 +38,18 @@ class Lubo:
         return rect
 
     def run(self):
+        i = 1
+        pix = self.pixel(10, 30)
+
         while self.run_flag:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.run_flag = False
-            pix = self.pixel(10, 30)
 
-            i = 1
-
-            if i == 99:
-                i = 0
+            print(i)
             pix.move(i, 30)
+            if i == 99:
+                i = 1
             i += 1
 
 
