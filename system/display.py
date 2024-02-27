@@ -1,6 +1,6 @@
 # 0.0.1
 
-from ssd1306 import SSD1306_I2C
+from system.ssd1306 import SSD1306_I2C
 from machine import Pin, I2C
 from time import sleep
 
