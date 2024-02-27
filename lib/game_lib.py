@@ -13,3 +13,11 @@ class GameObject():
             display.rect(self.position.x, self.position.y, self.size.x, self.size.y, 1, True)
             display.show()
             display.rect(self.position.x, self.position.y, self.size.x, self.size.y, 0, True)
+            
+        def is_colliding(self, other: 'GameObject'):
+            # Check for collision in each dimension
+            collision_x = (self.position.x < other.position.x + other.size.x) and (self.position.x + self.size.x > other.position.x)
+            collision_y = (self.position.y < other.position.y + other.size.y) and (self.position.y + self.size.y > other.position.y)
+            
+            # Return True if there is a collision in both dimensions
+            return collision_x and collision_y
