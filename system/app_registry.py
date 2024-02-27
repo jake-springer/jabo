@@ -18,19 +18,20 @@ main_menu.options = [apps_menu, games_menu, settings_menu]
 # STEP 1: Import the application object
 
 from apps.pong import Pong
-
+from apps.counter import Counter
 
 # -----------------------------------------------------------------
 # STEP 2: Create the app item with the title the app will have in
 #         the browser
 
 pong_app = AppItem('Pong', Pong())
+counter_app = AppItem('Counter', Counter())
 
 
 # -----------------------------------------------------------------
 # STEP 3: Add the app item to whatever list it belongs to
 
-APPS = []
+APPS = [counter_app]
 GAMES = [pong_app]
 SETTINGS = []
 

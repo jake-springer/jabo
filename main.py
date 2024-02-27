@@ -1,7 +1,7 @@
 # 2/15/24
 
-from machine import I2C, Pin
 from system.jabos import splash_screen
+from machine import I2C, Pin
 from system.jabrowser import browser
 
 # ------------------------------------------------------
