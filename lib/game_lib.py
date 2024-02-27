@@ -1,5 +1,5 @@
 from lib._math import Vector2D
-
+import pygame
 
 class GameObject():
         position: Vector2D
@@ -10,6 +10,11 @@ class GameObject():
             self.size = size
 
         def display(self, display):
+            if(type(display) == type(pygame)):
+                rect = pygame.Rect(self.position.x, self.position.y, self.size.x, self.size.y)
+                pygame.draw.rect(display, (255, 255, 255), rect)
+                return
+            
             display.rect(self.position.x, self.position.y, self.size.x, self.size.y, 1, True)
             display.show()
             display.rect(self.position.x, self.position.y, self.size.x, self.size.y, 0, True)
