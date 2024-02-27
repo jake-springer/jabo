@@ -1,5 +1,4 @@
-from utils import math
-from math import Vector2D
+from lib._math import Vector2D
 
 
 class GameObject():

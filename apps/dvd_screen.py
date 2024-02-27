@@ -1,4 +1,5 @@
 from display import Display
+
 from machine import Pin
 from random import randint
 from math import Vector2D
